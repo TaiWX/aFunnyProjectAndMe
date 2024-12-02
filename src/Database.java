@@ -2,8 +2,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class Database {
@@ -35,12 +34,58 @@ public class Database {
     }
 
 
-    public static Connection getConnection() throws SQLException {
-        return ds.getConnection();
+    public static void getConnection() {
+        try {
+            connection = ds.getConnection();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public static void closeConnection(){
         ((HikariDataSource)ds).close();
     }
+
+    // select
+    public static void select(String tableName){
+        //TODO: validation of tableName
+
+        String query = "SELECT * FROM " + tableName;
+        try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+
+            ResultSet rs = preparedStatement.executeQuery();
+            ResultSetMetaData resultSetMetaData = rs.getMetaData();
+
+            int columnCount = resultSetMetaData.getColumnCount();
+            while(rs.next()){
+                for (int i = 1; i <= columnCount; i++){
+                    System.out.print(rs.getString(i) + " ");
+                }
+                System.out.println();
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void getCategory(CategoryList l){
+        try(PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM category")){
+
+            ResultSet rs = preparedStatement.executeQuery();
+            ResultSetMetaData resultSetMetaData = rs.getMetaData();
+
+            int columnCount = resultSetMetaData.getColumnCount();
+            while(rs.next()){
+                for (int i = 2; i <= columnCount; i++){ // skip the id
+                    String name = rs.getString(i);
+                    l.addCategory(new Category(name));
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+
 
 }
