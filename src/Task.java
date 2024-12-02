@@ -5,4 +5,5 @@ public class Task {
     String title;
     String description;
     Date date;
+    Task dependency_task;
 }
