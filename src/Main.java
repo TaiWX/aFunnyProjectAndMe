@@ -11,8 +11,8 @@ public class Main {
 
         CategoryList l = new CategoryList();
         Database.getCategory(l);
-        for (int i = 0; i < l.len(); i++) {
-            System.out.println(l.getCategory(i).toString());
+        for (int i = 0; i < l.size(); i++) {
+            System.out.println(l.getItem(i).toString());
         }
 
         Database.closeConnection();

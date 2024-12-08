@@ -78,7 +78,7 @@ public class Database {
             while(rs.next()){
                 for (int i = 2; i <= columnCount; i++){ // skip the id
                     String name = rs.getString(i);
-                    l.addCategory(new Category(name));
+                    l.addItem(new Category(name));
                 }
             }
         } catch (SQLException e){
