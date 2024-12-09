@@ -12,6 +12,8 @@ public abstract class SubList<T> {
         list.add(t);
     }
 
+    public abstract void addItemByName(String name, int id);
+
     public int size(){
         return list.size();
     }
