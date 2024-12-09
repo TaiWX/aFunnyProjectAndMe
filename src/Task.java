@@ -8,5 +8,8 @@ public class Task {
     CompletionStatus completionStatus;
     Category category;
     Priority priority;
+    Recurring recurring;
+    Date startDate;
+    Date endDate;
     Task dependency_task;
 }
