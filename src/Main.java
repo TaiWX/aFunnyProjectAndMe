@@ -34,6 +34,8 @@ public class Main {
             System.out.println(l3.getItem(i).toString());
         }
 
+        TaskList taskList = Database.getTask();
+
         Database.closeConnection();
     }
 }

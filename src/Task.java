@@ -1,31 +1,31 @@
-import java.util.Date;
+import java.time.LocalDate;
 
 // Object Task is used for demonstration
 public class Task {
     int task_id;
     String title;
     String description;
-    Date date;
-    CompletionStatus completionStatus;
-    Category category;
-    Priority priority;
-    Recurring recurring;
-    Date startDate;
-    Date endDate;
-    Task dependency_task;
+    LocalDate date;
+    int completionStatusId;
+    int categoryId;
+    int priorityId;
+    int recurringId;
+    LocalDate startDate;
+    LocalDate endDate;
+    Integer dependency_taskId;
 
-    public Task(int task_id, String title, String description, Date date, CompletionStatus completionStatus, Category category, Priority priority, Recurring recurring, Date startDate, Date endDate, Task dependency_task) {
+    public Task(int task_id, String title, String description, LocalDate date, int completionStatusId, int categoryId, int priorityId, int recurringId, LocalDate startDate, LocalDate endDate, Integer dependency_taskId) {
         this.task_id = task_id;
         this.title = title;
         this.description = description;
         this.date = date;
-        this.completionStatus = completionStatus;
-        this.category = category;
-        this.priority = priority;
-        this.recurring = recurring;
+        this.completionStatusId = completionStatusId;
+        this.categoryId = categoryId;
+        this.priorityId = priorityId;
+        this.recurringId = recurringId;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.dependency_task = dependency_task;
+        this.dependency_taskId = dependency_taskId;
 
     }
 }

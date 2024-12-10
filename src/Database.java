@@ -3,6 +3,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class Database {
@@ -68,18 +69,45 @@ public class Database {
         }
     }
 
-    public static void getCategory(CategoryList l){
-        try(PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM category")){
+    public static TaskList getTask(){
+        String query = "SELECT * FROM task LEFT JOIN recurring_date ON task.task_id = recurring_date.task_id";
+        TaskList list = new TaskList();
+        try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
 
             ResultSet rs = preparedStatement.executeQuery();
-            ResultSetMetaData resultSetMetaData = rs.getMetaData();
 
-            int columnCount = resultSetMetaData.getColumnCount();
             while(rs.next()){
-                for (int i = 2; i <= columnCount; i++){ // skip the id
-                    String name = rs.getString(i);
-                    l.addItem(new Category(name));
-                }
+                int task_id = rs.getInt("task_id");
+                String title = rs.getString("title");
+                String description = rs.getString("descr");
+                LocalDate date = rs.getObject("due_date", LocalDate.class);
+                int completionStatus = rs.getInt("completion_id");
+                int category = rs.getInt("category_id");
+                int priority = rs.getInt("priority_id");
+                int recurring = rs.getInt("recurring_id");
+                LocalDate startDate = rs.getObject("start_date", LocalDate.class);
+                LocalDate endDate = rs.getObject("end_date", LocalDate.class);
+                Integer dependency_taskId = rs.getObject("dependency_task_id", Integer.class);
+                list.addTask(new Task(task_id, title, description, date, completionStatus, category, priority, recurring, startDate, endDate, dependency_taskId));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public static <T> void getSubList(SubList<T> l, String tableName){
+        String query = "SELECT * FROM " + tableName; // TODO: handling exception of table name
+        try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while(rs.next()){
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+
+                l.addItemByName(name, id);
             }
         } catch (SQLException e){
             e.printStackTrace();

@@ -1,5 +1,5 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TaskList {
@@ -13,8 +13,8 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public void addTaskByAll(int task_id, String title, String description, Date date, CompletionStatus completionStatus, Category category, Priority priority, Recurring recurring, Date startDate, Date endDate, Task dependency_task) {
-        taskList.add(new Task(task_id, title, description, date, completionStatus, category, priority, recurring, startDate, endDate, dependency_task));
+    public void addTaskByAll(int task_id, String title, String description, LocalDate date, int completionStatusId, int categoryId, int priorityId, int recurringId, LocalDate startDate, LocalDate endDate, Integer dependency_taskId) {
+        taskList.add(new Task(task_id, title, description, date, completionStatusId, categoryId, priorityId, recurringId, startDate, endDate, dependency_taskId));
     }
 
     public int size() {
