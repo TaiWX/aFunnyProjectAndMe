@@ -16,27 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `completion_status`
+-- Table structure for table `recurring`
 --
 
-DROP TABLE IF EXISTS `completion_status`;
+DROP TABLE IF EXISTS `recurring`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `completion_status` (
-  `completion_id` int NOT NULL AUTO_INCREMENT,
-  `completion_name` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`completion_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `recurring` (
+  `recurring_id` int NOT NULL AUTO_INCREMENT,
+  `recurring_name` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`recurring_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `completion_status`
+-- Dumping data for table `recurring`
 --
 
-LOCK TABLES `completion_status` WRITE;
-/*!40000 ALTER TABLE `completion_status` DISABLE KEYS */;
-INSERT INTO `completion_status` VALUES (1,'Incomplete'),(2,'Complete');
-/*!40000 ALTER TABLE `completion_status` ENABLE KEYS */;
+LOCK TABLES `recurring` WRITE;
+/*!40000 ALTER TABLE `recurring` DISABLE KEYS */;
+INSERT INTO `recurring` VALUES (1,'none'),(2,'daily'),(3,'weekly'),(4,'monthly');
+/*!40000 ALTER TABLE `recurring` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-02 17:57:33
+-- Dump completed on 2024-12-12 10:39:53

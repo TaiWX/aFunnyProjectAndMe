@@ -31,13 +31,16 @@ CREATE TABLE `task` (
   `category_id` int DEFAULT NULL,
   `priority_id` int DEFAULT NULL,
   `dependency_task_id` int DEFAULT NULL,
+  `recurring_id` int DEFAULT NULL,
   PRIMARY KEY (`task_id`),
   KEY `completion_id` (`completion_id`),
   KEY `category_id` (`category_id`),
   KEY `priority_id` (`priority_id`),
+  KEY `recurring_id` (`recurring_id`),
   CONSTRAINT `task_ibfk_1` FOREIGN KEY (`completion_id`) REFERENCES `completion_status` (`completion_id`) ON DELETE SET NULL,
   CONSTRAINT `task_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE SET NULL,
-  CONSTRAINT `task_ibfk_3` FOREIGN KEY (`priority_id`) REFERENCES `priority` (`priority_id`) ON DELETE SET NULL
+  CONSTRAINT `task_ibfk_3` FOREIGN KEY (`priority_id`) REFERENCES `priority` (`priority_id`) ON DELETE SET NULL,
+  CONSTRAINT `task_ibfk_4` FOREIGN KEY (`recurring_id`) REFERENCES `recurring` (`recurring_id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -47,7 +50,7 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (1,'Morning Exercise','10-15 minutes of activity like yoga, jogging, or a brisk walk','2024-12-01',2,2,2,NULL),(2,'Organize Your Workspace','Declutter unnecessary items, arrange your tools, and ensure your area is tidy to improve focus and productivity.','2024-12-01',2,2,1,NULL),(3,'Meeting','Discuss about implementation of human ','2024-12-02',1,3,3,3),(4,'Preparation for presentation','Just do some research about it','2024-12-02',1,1,3,NULL);
+INSERT INTO `task` VALUES (1,'Morning Exercise','10-15 minutes of activity like yoga, jogging, or a brisk walk','2024-12-01',2,2,2,NULL,2),(2,'Organize Your Workspace','Declutter unnecessary items, arrange your tools, and ensure your area is tidy to improve focus and productivity.','2024-12-01',2,2,1,NULL,3),(3,'Meeting','Discuss about implementation of human ','2024-12-02',1,3,3,3,1),(4,'Preparation for presentation','Just do some research about it','2024-12-02',1,1,3,NULL,1);
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-02 17:57:33
+-- Dump completed on 2024-12-12 10:39:53
