@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskList {
+public class TaskList{
     List<Task> taskList;
 
     public TaskList() {
@@ -10,6 +10,18 @@ public class TaskList {
     }
 
     public void addTask(Task task) {
+        taskList.add(task);
+
+        Database.insertTask(task);
+    }
+
+    public void removeTask(int task_id) {
+        taskList.remove(task_id); //TODO
+
+        Database.deleteTask(task_id);
+    }
+
+    public void fetchTask(Task task) {
         taskList.add(task);
     }
 
@@ -23,5 +35,12 @@ public class TaskList {
 
     public Task getTask(int index) {
         return taskList.get(index);
+    }
+
+    public void displayAll(){
+        int size = taskList.size();
+        for (Task task : taskList) {
+            System.out.println(task.toString());
+        }
     }
 }

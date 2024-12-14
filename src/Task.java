@@ -6,7 +6,7 @@ public class Task {
     String title;
     String description;
     LocalDate date;
-    int completionStatusId;
+    int completionId;
     int categoryId;
     int priorityId;
     int recurringId;
@@ -19,7 +19,7 @@ public class Task {
         this.title = title;
         this.description = description;
         this.date = date;
-        this.completionStatusId = completionStatusId;
+        this.completionId = completionStatusId;
         this.categoryId = categoryId;
         this.priorityId = priorityId;
         this.recurringId = recurringId;
@@ -27,5 +27,40 @@ public class Task {
         this.endDate = endDate;
         this.dependency_taskId = dependency_taskId;
 
+    }
+
+    public Task(String title, String description, LocalDate date, int completionStatusId, int categoryId, int priorityId, int recurringId, LocalDate startDate, LocalDate endDate, Integer dependency_taskId) {
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.completionId = completionStatusId;
+        this.categoryId = categoryId;
+        this.priorityId = priorityId;
+        this.recurringId = recurringId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.dependency_taskId = dependency_taskId;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "task_id=" + task_id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                ", completionStatusId=" + completionId +
+                ", categoryId=" + categoryId +
+                ", priorityId=" + priorityId +
+                ", recurringId=" + recurringId +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", dependency_taskId=" + dependency_taskId +
+                '}';
+    }
+
+    public void insertId(int task_id){
+        this.task_id = task_id;
     }
 }

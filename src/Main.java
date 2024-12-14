@@ -1,10 +1,11 @@
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
         // just test
-        Database.getConnection();
         Database.select("task");
         Database.select("category");
         Database.select("completion_status");
@@ -36,6 +37,12 @@ public class Main {
 
         TaskList taskList = Database.getTask();
 
+        Task t = new Task("test1", "descr", LocalDate.parse("2024-12-14"), 2, 2, 2, 1, null, null, null);
+        taskList.addTask(t);
+        taskList.displayAll();
+        taskList.removeTask(4);
+        System.out.println();
+        taskList.displayAll();
         Database.closeConnection();
     }
 }
