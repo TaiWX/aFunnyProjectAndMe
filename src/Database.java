@@ -164,5 +164,19 @@ public class Database {
         }
     }
 
+    // Update completion_id of task
+    public static void updateCompletion(int task_id, int completionId){
+        String query = "UPDATE task SET completion_id = ? WHERE task_id = ?";
+        try (Connection connection = ds.getConnection();
+        PreparedStatement updateStmt = connection.prepareStatement(query)){
+            updateStmt.setInt(1, completionId);
+            updateStmt.setInt(2, task_id);
+
+            updateStmt.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println(e.getSQLState());
+        }
+    }
 
 }

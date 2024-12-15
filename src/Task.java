@@ -67,4 +67,8 @@ public class Task {
     public int getTask_id() {
         return task_id;
     }
+
+    public void setCompletionId(int completionId) {
+        this.completionId = completionId;
+    }
 }

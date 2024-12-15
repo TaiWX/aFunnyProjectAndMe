@@ -69,4 +69,14 @@ public class TaskList {
 
         return -1;
     }
+
+    // Update completionId of a task
+    public void updateCompletionStatus(int task_id, int completionId){
+        int index = searchIndex(task_id);
+        if (index < 0 || index >= size())
+            throw new IllegalArgumentException();
+        taskList.get(index).setCompletionId(completionId);
+
+        Database.updateCompletion(task_id, completionId);
+    }
 }

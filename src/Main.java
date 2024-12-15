@@ -39,10 +39,15 @@ public class Main {
 
 //        Task t = new Task("test1", "descr", LocalDate.parse("2024-12-14"), 2, 2, 2, 1, null, null, null);
 //        taskList.addTask(t);
-        taskList.displayAll();
-        taskList.removeTask(71);
+//        taskList.displayAll();
+//        taskList.removeTask(72);
         System.out.println();
         taskList.displayAll();
+
+        // update completion status
+        taskList.updateCompletionStatus(75, 1);
+        taskList.displayAll();
+
         Database.closeConnection();
     }
 }
