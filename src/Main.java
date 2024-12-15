@@ -37,10 +37,10 @@ public class Main {
 
         TaskList taskList = Database.getTask();
 
-        Task t = new Task("test1", "descr", LocalDate.parse("2024-12-14"), 2, 2, 2, 1, null, null, null);
-        taskList.addTask(t);
+//        Task t = new Task("test1", "descr", LocalDate.parse("2024-12-14"), 2, 2, 2, 1, null, null, null);
+//        taskList.addTask(t);
         taskList.displayAll();
-        taskList.removeTask(4);
+        taskList.removeTask(71);
         System.out.println();
         taskList.displayAll();
         Database.closeConnection();

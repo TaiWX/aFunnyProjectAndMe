@@ -38,44 +38,44 @@ public class Database {
         return ds.getConnection();
     }
 
-    public static void closeConnection(){
-        ((HikariDataSource)ds).close();
+    public static void closeConnection() {
+        ((HikariDataSource) ds).close();
     }
 
     // select
-    public static void select(String tableName){
+    public static void select(String tableName) {
         //TODO: validation of tableName
 
         String query = "SELECT * FROM " + tableName;
-        try(
+        try (
                 Connection connection = ds.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             ResultSet rs = preparedStatement.executeQuery();
             ResultSetMetaData resultSetMetaData = rs.getMetaData();
 
             int columnCount = resultSetMetaData.getColumnCount();
-            while(rs.next()){
-                for (int i = 1; i <= columnCount; i++){
+            while (rs.next()) {
+                for (int i = 1; i <= columnCount; i++) {
                     System.out.print(rs.getString(i) + " ");
                 }
                 System.out.println();
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static TaskList getTask(){
+    public static TaskList getTask() {
         String query = "SELECT * FROM task LEFT JOIN recurring_date ON task.task_id = recurring_date.task_id";
         TaskList list = new TaskList();
-        try(
+        try (
                 Connection connection = ds.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             ResultSet rs = preparedStatement.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 int task_id = rs.getInt("task_id");
                 String title = rs.getString("title");
                 String description = rs.getString("descr");
@@ -90,33 +90,33 @@ public class Database {
 
                 list.fetchTask(new Task(task_id, title, description, date, completionStatus, category, priority, recurring, startDate, endDate, dependency_taskId));
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return list;
     }
 
-    public static <T> void getSubList(SubList<T> l, String tableName){
+    public static <T> void getSubList(SubList<T> l, String tableName) {
         String query = "SELECT * FROM " + tableName; // TODO: handling exception of table name
-        try(
+        try (
                 Connection connection = ds.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             ResultSet rs = preparedStatement.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
 
                 l.addItemByName(name, id);
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static void insertTask(Task task){
+    public static void insertTask(Task task) {
         String queryTask = "INSERT INTO task (title, descr, due_date, completion_id, category_id, priority_id, dependency_task_id, recurring_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         String queryRecurring = "INSERT INTO recurring_date VALUES (?, ?, ?);";
         try (
@@ -139,7 +139,7 @@ public class Database {
             if (key.next())
                 task.insertId(key.getInt(1));
 
-            if (task.recurringId != 1){
+            if (task.recurringId != 1) {
 
                 recurringStmt.setInt(1, task.task_id);
                 recurringStmt.setString(2, task.startDate != null ? task.startDate.toString() : null);
@@ -163,7 +163,6 @@ public class Database {
 
         }
     }
-
 
 
 }
